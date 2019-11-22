@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>E-voting</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+	<!-- UIkit CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.40/css/uikit.min.css" />
+	<!-- UIkit JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.40/js/uikit.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.40/js/uikit-icons.min.js"></script>
+
+	<!--AMCHARTS-->
+	<script src="https://www.amcharts.com/lib/4/core.js"></script>
+	<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+	<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+
+	<style>
+		html {
+			background-color: #989bb5;
+		}
+
+		nav {
+			height: 50px;
+		}
+
+		.my-nav {
+			height: inherit !important;
+		}
+	</style>
+	{% block head %}
+	{% endblock %}
+</head>
+
+<body>
+	{% block nav %}
+	<nav class="uk-navbar-container" uk-navbar>
+		<div class="uk-navbar-left my-nav">
+			<ul class="uk-navbar-nav my-nav">
+				<li class="uk-active my-nav">
+					<a class="my-nav" href="/" uk-icon="home"> Home </a>
+				</li>
+				<li class="uk-active my-nav">
+					<a class="uk-button uk-button-default my-nav" href="/votes">Votaciones</a>
+				</li>
+				<li class="uk-active my-nav">
+					<a class="uk-button uk-button-default my-nav" href="/votes/vote">Votar</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	{% endblock %}
+
+	{% block content %}
+	{% endblock %}
+
+	{% block script %}
+
+	{% endblock %}
+</body>
+
+</html>

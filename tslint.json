@@ -1,0 +1,62 @@
+{
+	"defaultSeverity": "error",
+	"extends": [
+		"tslint:recommended"
+	],
+	"jsRules": {},
+	"linterOptions": {
+		"exclude": []
+	},
+	"rules": {
+		"align": [
+			true,
+			"statements"
+		],
+		"max-line-length": {
+			"options": [
+				200
+			]
+		},
+		"interface-name": [
+			false
+		],
+		"quotemark": [
+			true,
+			"single"
+		],
+		"linebreak-style": [
+			true,
+			"LF"
+		],
+		"indent": [
+			true,
+			"tabs",
+			4
+		],
+		"eofline": false,
+		"no-console": {
+			"severity": "warn",
+			"options": [
+				"log",
+				"debug"
+			]
+		},
+		"variable-name": [
+			true,
+			"check-format",
+			"ban-keywords",
+			"allow-leading-underscore"
+		],
+		"ordered-imports": [
+			true,
+			{
+				"import-sources-order": "lowercase-last",
+				"named-imports-order": "lowercase-first",
+				"module-source-path": "full"
+			}
+		],
+		"array-type": false,
+		"object-literal-sort-keys": false
+	},
+	"rulesDirectory": []
+}
