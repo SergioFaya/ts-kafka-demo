@@ -7,8 +7,22 @@ const init = new AppInitializer();
 const app = init.app;
 const PORT = 8080;
 
-const kafkaConsumer = new KafkaConsumer(init.client);
-const kafkaProducer = new KafkaProducer(init.client);
+const kafkaConsumer = new KafkaConsumer();
+const kafkaProducer = new KafkaProducer();
+
+init.client.on("ready", () => {
+	kafkaConsumer.setUpConsumer(init.client);
+	kafkaProducer.setUpProducer(init.client);
+
+	kafkaConsumer.consumer.on('message', (message: any) => {
+		console.info(message);
+		data.push(message);
+	});
+
+	kafkaConsumer.consumer.on('error', (err: any) => {
+		console.error(err);
+	});
+});
 
 const options = [
 	{
@@ -43,15 +57,6 @@ const data = [{
 	"votos": 3
 }];
 
-kafkaConsumer.consumer.on('message', (message: any) => {
-	console.info(message);
-	data.push(message);
-});
-
-kafkaConsumer.consumer.on('error', (err: any) => {
-	console.error(err);
-});
-
 app.get('/', (_req, res) => {
 	res.redirect('/votes');
 });
@@ -72,14 +77,16 @@ app.post('/votes/vote', (req, res) => {
 			topic: 'test',
 			messages: id,
 		};
-		kafkaProducer.sendMessage(message, (err: any, data: any) => {
+		kafkaProducer.producer.send([message], (err, data) => {
 			if (err) {
-				res.status(500).json({ timestamp: Date.now() });
+				console.log(err);
+				res.status(500).json({ message: 'Error', timestamp: Date.now(), err });
+
 			} else {
-				res.status(202).json({ timestamp: Date.now(), data });
+				res.status(202).json({ message: 'Success', timestamp: Date.now(), data });
+
 			}
 		});
-
 	} else {
 		res.status(412).json({ message: 'Validation error', timestamp: Date.now() });
 	}

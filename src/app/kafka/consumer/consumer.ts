@@ -2,18 +2,12 @@ import { Consumer, KafkaClient, OffsetFetchRequest } from 'kafka-node';
 
 export class KafkaConsumer {
 
-	private _client: KafkaClient;
 	private _consumer: Consumer;
-
-	constructor(client: KafkaClient) {
-		this._client = client;
-		this.setUpConsumer();
-	}
 
 	/**
 	 * Configures the consumer and topics to be used
 	 */
-	private setUpConsumer() {
+	public setUpConsumer(client: KafkaClient) {
 		const payloadConsumer = new Array<OffsetFetchRequest>();
 
 		/* payloadConsumer.push({
@@ -22,7 +16,7 @@ export class KafkaConsumer {
 			partition: 0, // default 0
 		}); */
 
-		this._consumer = new Consumer(this._client, payloadConsumer, {
+		this._consumer = new Consumer(client, payloadConsumer, {
 			autoCommit: true,
 		});
 
