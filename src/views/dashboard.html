@@ -4,19 +4,6 @@
 	<h2>Charts</h2>
 
 	<div class="uk-grid-medium uk-child-width-expand@s uk-text-center" uk-grid>
-		<div class="uk-card uk-card-body uk-card-default">
-			<div class="col-6" id="stacked-bar-chart">
-				GRID
-			</div>
-		</div>
-		<div class="uk-card uk-card-body uk-card-default">
-			<div class="col-6" id="donut-chart">
-				GRID
-			</div>
-		</div>
-
-	</div>
-	<div class="uk-grid-medium uk-child-width-expand@s uk-text-center" uk-grid>
 		<div class="uk-card uk-card-body uk-card-default uk-margin-bottom uk-margin-top">
 			<div id="pie-chart">
 
@@ -30,21 +17,6 @@
 <!-- Chart code -->
 <script>
 
-	var data = [{
-		"partido": "Vox",
-		"votos": 1,
-		"color": '#16c42a'
-	}, {
-		"partido": "PSOE",
-		"votos": 1
-	}, {
-		"partido": "PP",
-		"votos": 2
-	}, {
-		"partido": "Podemos",
-		"votos": 3
-	}
-	];
 	am4core.ready(function () {
 
 		// Themes begin
@@ -60,8 +32,8 @@
 		chart.dataSource.reloadFrequency = 500;
 		// Add and configure Series
 		var pieSeries = chart.series.push(new am4charts.PieSeries());
-		pieSeries.dataFields.value = "votos";
-		pieSeries.dataFields.category = "partido";
+		pieSeries.dataFields.value = "votes";
+		pieSeries.dataFields.category = "option";
 		pieSeries.dataFields.color = "#fff";
 		pieSeries.slices.template.propertyFields.fill = "color";
 		pieSeries.slices.template.stroke = am4core.color("#fff");

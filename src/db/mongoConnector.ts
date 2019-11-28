@@ -10,6 +10,7 @@ export class MongoHelper {
 					reject(err);
 				} else {
 					MongoHelper.client = client;
+					console.info('database connected');
 					resolve(client);
 				}
 			});

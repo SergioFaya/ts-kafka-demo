@@ -5,18 +5,24 @@
 
 	<h2>Votaciones</h2>
 
-	<div id="alert">
-		<span id="alertText"></span>
+	{%if message != null %}
+	<div class="uk-alert-danger" uk-alert>
 		<a class="uk-alert-close" uk-close></a>
+		<p>{{message}}</p>
 	</div>
+	{% endif %}
+
 
 	<div class="uk-card uk-card-body uk-card-default uk-margin-bottom uk-margin-top">
+
 		<div class="uk-grid-medium uk-child-width-expand@s uk-text-center" uk-grid>
 
 			{% for option in options %}
-			<button class="uk-button uk-button-secondary uk-button-large votingButton" {%if option.color != null %}
-				style="background-color: {{option.color}};" {% endif %}
-				data-option='{{option.id}}'>{{option.text}}</button>
+			<form method="POST">
+				<button class="uk-button uk-button-secondary uk-button-large votingButton" {%if option.color != null %}
+					style="background-color: {{option.color}};" {% endif %} name="option"
+					value='{{JSON.stringify(option)}}'>{{option.option}}</button>
+			</form>
 			{% endfor %}
 
 		</div>
@@ -25,38 +31,6 @@
 {% endblock %}
 
 {% block script %}
-<script>
 
-	$('.votingButton').click((event) => {
-		const id = event.target.dataset.option;
-
-		$.ajax({
-			type: "POST",
-			url: '/votes/vote',
-			data: {
-				id: id
-			},
-			success: alertInfo,
-			error: alertError,
-			dataType: 'json'
-		});
-	});
-
-	function alertInfo() {
-		$('#alertText').text('El voto se ha cargado correctamente');
-		$('#alert').addClass('uk-alert-success')
-		alert();
-	}
-
-	function alertError() {
-		$('#alertText').text('No se ha podido procesar el voto');
-		$('#alert').addClass('uk-alert-danger')
-		alert();
-	}
-
-	function alert() {
-		UIkit.alert('#alert', { animation: true });
-	}
-</script>
 
 {% endblock %}

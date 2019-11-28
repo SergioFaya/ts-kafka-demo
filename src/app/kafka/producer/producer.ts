@@ -2,6 +2,7 @@
 import { KafkaClient, Producer, ProduceRequest } from 'kafka-node';
 
 export class KafkaProducer {
+
 	private _producer: Producer;
 
 	get producer() { return this._producer; }
@@ -16,17 +17,16 @@ export class KafkaProducer {
 	}
 	public setUpProducer(client: KafkaClient) {
 		this._producer = new Producer(client);
-		this.createTopics(['test']);
-	}
-
-	private createTopics(topics: string[]) {
 		this._producer.on('ready', () => {
-			this._producer.createTopics(topics, false, (err, data) => {
+			console.log('producer ready')
+			this._producer.createTopics(['test'], false, (err, data) => {
 				if (err) {
 					console.error(err);
 				}
 				console.info(data);
 			});
 		});
+
 	}
+
 }
